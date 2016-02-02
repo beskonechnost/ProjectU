@@ -1,0 +1,19 @@
+Изменение форматы даты.
+Через парсер. 
+
+SimpleDateFormat - парсер, позволяет задать свой формат ДАТЫ!
+
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern("dd/MM/yyyy");
+        //Date myDate = null;
+        java.util.Date myDate = new java.util.Date();
+        try {
+            myDate = sdf.parse("01/12/2015");
+
+            sdf.applyPattern("ddMMyyyy");
+            System.out.println(sdf.format(myDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+       
