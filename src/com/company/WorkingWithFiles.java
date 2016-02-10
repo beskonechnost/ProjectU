@@ -5,6 +5,7 @@ import java.nio.channels.FileChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.*;
 
 
 public class WorkingWithFiles {
@@ -59,10 +60,32 @@ public class WorkingWithFiles {
         String s = sdf.format(data);
         return s;
     }
-
     public static void copyToZDrive(String source, String receiver) throws IOException, InterruptedException {
         Process p = Runtime.getRuntime().exec("cmd /c xcopy \"" + source + "\" \"" + receiver +
                 "\" /z /y /j /c /q");
         p.waitFor();
+    }
+    public static void unRarFile(String rarFiles, String pathToExtract){
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c  unrar x -y "+rarFiles+" "+pathToExtract);
+            p.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void unRarFileFull(String rarFiles, String pathToExtract, int codeFilial){
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c  unrar x -y "+rarFiles+" "+pathToExtract);
+            p.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        File db = new File(pathToExtract+"\\lo.accdb");
+        db.getName();
     }
 }

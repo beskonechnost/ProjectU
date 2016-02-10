@@ -40,6 +40,7 @@ public class Main {
             //проверка даты. (выводит в формате МесяцДеньГод) проветрить позже
         }
         */
+        /*
         String s1 = "C:\\Users\\Work\\IdeaProjects\\importData-master.zip";
         String s2 = "C:\\Users\\Work\\IdeaProjects\\1";
         try {
@@ -47,6 +48,12 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("ok!");
+        */
+        /*
+        WorkingWithFiles.unRarFile("C:\\1\\full_001_05022016.rar","C:\\1");
+        */
+        WorkingWithFiles.unRarFileFull("C:\\1\\1.rar","C:\\1",11111);
         System.out.println("ok!");
     }
 }
