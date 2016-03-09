@@ -10,6 +10,7 @@ import java.awt.event.*;
  */
 public class TestFrame implements ActionListener{
     JButton button;
+    int n = 1;
 
 
     public static void main(String[] args) {
@@ -31,7 +32,6 @@ public class TestFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int n = 1;
         button.setText("ты кликнул по кнопке "+n+" раз");
         n++;
     }
