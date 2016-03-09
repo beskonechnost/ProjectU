@@ -1,42 +1,24 @@
 package com.company;
 
-import java.io.*;
-import java.nio.channels.FileChannel;
+import com.company.importPojo;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.*;
 
-enum CodeFilialDonetskRegion {
-    filialOne, filialTwo, filialThree, filialFore, filialFive, filialSix, filialSeven;
-
-
-}
-
-public class WorkingWithFiles {
-    //копирование файлов (пробное)
-    public static void copy(File source, File receiver) throws IOException {
-        FileChannel sourceChannel = new FileInputStream(source).getChannel();
-        try {
-            FileChannel receiverChannel = new FileOutputStream(receiver).getChannel();
-            try {
-                receiverChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-            } finally {
-                receiverChannel.close();
-            }
-        } finally {
-            sourceChannel.close();
-        }
-    }
-
+/**
+ * Created by Андрей on 12.02.2016.
+ */
+public class FileUtils {
     public static String getThePathToTheSource (importPojo ip) throws ParseException {
         String path = null;
-        String stringNumberFilial = threeGigitNumber(ip.getNumberFilial());
+        String stringNumberFilial = getNulliki(ip.getNumberFilial());
         path = "C:\\DropBox\\"+stringNumberFilial+"\\data\\daily_"+ip.getNumberFilial()+"_"+
                 +ip.getCodeFilial()+"_"+workWithData(ip.getLoadDate())+".rar";
         //посмотреть нужный формат даты и форма первого номера ЛО
         System.out.println(path);
-       return  path;
+        return  path;
     }
     public static String getThePathToTheReceiver (importPojo ip) throws ParseException {
         String path = null;
@@ -44,11 +26,11 @@ public class WorkingWithFiles {
                 workWithData(ip.getLoadDate())+".rar";
         return path;
     }
-    public static String threeGigitNumber (int number) {
+    public static String getNulliki (int number) {
         String s;
         if (number < 10) {
             String a = Integer.toString(number);
-            s = "00"+a;
+            s = "00" + a;
         } else {
             if ((number > 10) && (number < 100)) {
                 s = "0" + Integer.toString(number);
@@ -66,6 +48,9 @@ public class WorkingWithFiles {
         String s = sdf.format(data);
         return s;
     }
+
+    //для работы приведенных ниже методов, нужно прописать путь к папке winRar
+    //т.к. данные методы взаимодействуют с командной строкой
     public static void copyToZDrive(String source, String receiver) throws IOException, InterruptedException {
         Process p = Runtime.getRuntime().exec("cmd /c xcopy \"" + source + "\" \"" + receiver +
                 "\" /z /y /j /c /q");
@@ -81,20 +66,4 @@ public class WorkingWithFiles {
             e.printStackTrace();
         }
     }
-
-    //unRarFileFull пока работает не коректно. тестировать и дебажить
-    public static void unRarFileFull(String rarFiles, String pathToExtract, int codeFilial){
-        try {
-            Process p = Runtime.getRuntime().exec("cmd /c  unrar x -y "+rarFiles+" "+pathToExtract);
-            p.waitFor();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        File db = new File(pathToExtract+"\\lo.accdb");
-        db.getName();
-    }
-
-
 }
