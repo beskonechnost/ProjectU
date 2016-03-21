@@ -9,12 +9,9 @@ import java.awt.image.ImageObserver;
 /**
  * Created by Андрей on 03.03.2016.
  */
-public class TestFrame implements ActionListener{
+class TestFrame{
     JFrame frame;
-
-    JButton button1;
-    int n = 1;
-
+    JLabel label;
 
     public static void main(String[] args) {
         TestFrame gui = new TestFrame();
@@ -23,20 +20,31 @@ public class TestFrame implements ActionListener{
     public void go() {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        button1 = new JButton("Кликни, и цвет панели поменяется.");
-        button1.addActionListener(this);
+        JButton ColorButton = new JButton("Кликни, и цвет панели поменяется.");
+        ColorButton.addActionListener(new ColorListener());
+
+        JButton labelButton = new JButton("1");
+        labelButton.addActionListener(new LabelListener());
+
+        label = new JLabel("Я метка");
         GraphicTest drawPanel = new GraphicTest();
 
-        frame.getContentPane().add(BorderLayout.SOUTH, button1);
+        frame.getContentPane().add(BorderLayout.SOUTH, ColorButton);
         frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
+        frame.getContentPane().add(BorderLayout.EAST, labelButton);
+        frame.getContentPane().add(BorderLayout.WEST, label);
         frame.setSize(300, 300);
         frame.setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        frame.repaint();
-        button1.setText("Мы изменили цвет "+n+" раз");
-        n++;
+    class ColorListener implements ActionListener {
+        public void actionPerformed(ActionEvent event){
+            frame.repaint();
+        }
+    }
+    class LabelListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            label.setText("новый текст");
+        }
     }
 }
