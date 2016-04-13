@@ -19,7 +19,7 @@ public class GraphicTest extends JPanel {
         g.drawImage(image,1,1,this);
     }//добавляем изображение формсата jpg*/
 
-    public void paintComponent(Graphics g){
+    /*public void paintComponent(Graphics g){
         g.fillRect(0,0,this.getWidth(),this.getHeight());
         int red = (int)(Math.random()*255);
         int green = (int)(Math.random()*255);
@@ -28,6 +28,11 @@ public class GraphicTest extends JPanel {
         g.setColor(randomColor);
         g.fillOval(70,70,100,100);
     }//круг на черном фоне*/
+
+    public void paintComponent(Graphics g){
+        g.setColor(Color.green);
+        g.fillOval(70,70,40,40);
+    }//белый фон, оранжевый круг*/
 
 
 }
